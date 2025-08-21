@@ -15,6 +15,9 @@
 # production
 /build
 
+# static export output (GitHub Pages)
+docs/
+
 # misc
 .DS_Store
 *.pem
