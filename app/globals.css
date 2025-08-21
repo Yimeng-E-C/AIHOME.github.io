@@ -29,6 +29,41 @@ body {
   background-clip: text;
 }
 
+/* 圆形样式 */
+.rounded-circle {
+  border-radius: 50%;
+}
+
+.rounded-pill {
+  border-radius: 9999px;
+}
+
+/* 弹性动画关键帧 */
+@keyframes navbar-bounce-in {
+  0% {
+    transform: scale(0.8) translateY(10px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) translateY(-2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes navbar-slide-out {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-20px) scale(0.8);
+    opacity: 0;
+  }
+}
+
 /* 动态渐变背景动画 */
 @keyframes blob {
   0% {
@@ -69,4 +104,203 @@ body {
 
 .animate-pulse {
   animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* 新的背景动画关键帧 */
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50px, -50px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(45deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(55deg);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.1);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(12deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(22deg);
+  }
+}
+
+@keyframes float-rotate {
+  0%, 100% {
+    transform: translateY(0px) rotate(30deg) scale(1);
+  }
+  33% {
+    transform: translateY(-15px) rotate(60deg) scale(1.1);
+  }
+  66% {
+    transform: translateY(-5px) rotate(90deg) scale(0.9);
+  }
+}
+
+@keyframes float-scale {
+  0%, 100% {
+    transform: translateY(0px) rotate(75deg) scale(1);
+  }
+  50% {
+    transform: translateY(-25px) rotate(105deg) scale(1.2);
+  }
+}
+
+@keyframes float-stretch {
+  0%, 100% {
+    transform: translateY(0px) scaleY(1) scaleX(1);
+  }
+  33% {
+    transform: translateY(-20px) scaleY(1.3) scaleX(0.8);
+  }
+  66% {
+    transform: translateY(-10px) scaleY(0.7) scaleX(1.2);
+  }
+}
+
+@keyframes float-rectangle {
+  0%, 100% {
+    transform: translateY(0px) rotate(15deg) scaleX(1);
+  }
+  50% {
+    transform: translateY(-18px) rotate(25deg) scaleX(1.1);
+  }
+}
+
+@keyframes float-skew {
+  0%, 100% {
+    transform: translateY(0px) rotate(-25deg) skew(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(-15deg) skew(5deg);
+  }
+  66% {
+    transform: translateY(-8px) rotate(-35deg) skew(-3deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.8);
+  }
+}
+
+@keyframes beam {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* 应用动画类 */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-float-rotate {
+  animation: float-rotate 7s ease-in-out infinite;
+}
+
+.animate-float-scale {
+  animation: float-scale 9s ease-in-out infinite;
+}
+
+.animate-float-stretch {
+  animation: float-stretch 5s ease-in-out infinite;
+}
+
+.animate-float-rectangle {
+  animation: float-rectangle 6.5s ease-in-out infinite;
+}
+
+.animate-float-skew {
+  animation: float-skew 7.5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-beam {
+  animation: beam 8s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 20s linear infinite;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-1500 {
+  animation-delay: 1.5s;
+}
+
+.animation-delay-2500 {
+  animation-delay: 2.5s;
 }

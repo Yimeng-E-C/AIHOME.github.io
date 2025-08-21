@@ -1,3 +1,5 @@
+import TopBackground from '@/components/TopBackground'
+
 export default function LinksPage() {
   const linkCategories = [
     {
@@ -58,18 +60,12 @@ export default function LinksPage() {
   ]
 
   return (
-    <div className="min-h-screen">
-      {/* 动态渐变背景 - 只覆盖导航栏及以上部分 */}
-      <div className="fixed top-0 left-0 right-0 h-64 overflow-hidden z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-600 opacity-90"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-purple-400 via-pink-300 to-blue-400 opacity-80 animate-pulse"></div>
-        <div className="absolute -top-20 -right-20 w-60 h-60 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-65 animate-blob"></div>
-        <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-65 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-20 left-20 w-60 h-60 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-65 animate-blob animation-delay-4000"></div>
-      </div>
+    <div className="min-h-screen bg-white">
+      {/* 使用新的动态背景组件 */}
+      <TopBackground height="h-64" />
       
-      {/* 柔和过渡层 - 覆盖在渐变背景上面，相同尺寸 */}
-      <div className="fixed top-0 left-0 right-0 h-64 z-5">
+      {/* 柔和过渡层 */}
+      <div className="fixed top-0 left-0 right-0 h-64" style={{ zIndex: 1 }}>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20"></div>
         <div className="absolute bottom-0 left-0 right-0">
           <div className="h-20 bg-gradient-to-b from-transparent via-white/10 to-white/25"></div>
@@ -99,17 +95,17 @@ export default function LinksPage() {
           {linkCategories.map((category, index) => (
             <div key={index} className="bg-white rounded-xl shadow-md p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="w-2 h-2 bg-blue-500 rounded-circle mr-3"></span>
+                <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
                 {category.title}
               </h2>
               <div className="space-y-3">
                 {category.links.map((link, linkIndex) => (
-                  <div key={linkIndex} className="border-l-4 border-blue-100 pl-4 hover:border-blue-300 transition-colors rounded-r-base">
+                  <div key={linkIndex} className="border-l-4 border-blue-100 pl-4 hover:border-blue-300 transition-colors rounded-r">
                     <a
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block group p-2 -m-2 rounded-base hover:bg-gray-50 transition-colors"
+                      className="block group p-2 -m-2 rounded hover:bg-gray-50 transition-colors"
                     >
                       <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
                         {link.name}
