@@ -37,7 +37,6 @@ jobs:
 
       - name: Prepare Pages artifact (copy out -> docs)
         run: |
-          # Ensure a clean docs directory (some repos configure Pages to use /docs)
           rm -rf ./docs
           mkdir -p ./docs
           if [ -d ./out ]; then
@@ -45,7 +44,7 @@ jobs:
           else
             echo "Warning: ./out not found after build"
           fi
-          # Disable Jekyll processing to avoid Jekyll-related build errors
+          # Ensure Jekyll is disabled for the uploaded artifact
           touch ./docs/.nojekyll
 
       - name: Upload artifact
