@@ -43,13 +43,13 @@ const Hero = () => {
   ]
 
   return (
-    <section className="bg-gradient-to-br from-blue-50 to-purple-50 py-20">
+    <section className="pt-28 pb-10 relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            <span className="gradient-text">AIHOME</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            <span className="text-white">AIHOME</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow">
             您的AI信息聚合平台，追踪前沿学术研究，发现商业应用，探索AI世界
           </p>
           
@@ -61,10 +61,75 @@ const Hero = () => {
                 href={item.href}
                 className="flex flex-col items-center group"
               >
-                <div className={`w-16 h-16 ${item.bgColor} rounded-xl flex items-center justify-center mb-2 group-hover:scale-110 transition-transform ${item.iconColor}`}>
-                  {item.icon}
+                <div className={`relative w-16 h-16 backdrop-blur-lg backdrop-saturate-[180%] rounded-xl flex items-center justify-center mb-2 group-hover:scale-110 transition-all text-white border border-white/20 shadow-2xl overflow-hidden`}
+                style={{
+                  backdropFilter: 'blur(8px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(8px) saturate(180%)',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 100%)',
+                  boxShadow: `
+                    0 8px 32px rgba(0,0,0,0.12),
+                    0 0 0 1px rgba(255,255,255,0.05) inset,
+                    0 1px 0 rgba(255,255,255,0.2) inset
+                  `
+                }}>
+                  {/* 内部光晕效果 */}
+                  <div className="absolute inset-0 rounded-inherit bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
+                  
+                  {/* 简化的玻璃效果层 */}
+                  <div className="absolute inset-0 rounded-inherit pointer-events-none overflow-hidden">
+                    {/* 顶部高光 */}
+                    <div className="absolute top-0 left-0 right-0 h-1/2 rounded-t-inherit" style={{
+                      background: `linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 40%)`,
+                    }}></div>
+                    
+                    {/* 散射效果 - 简化版 */}
+                    <div className="absolute inset-0 rounded-inherit" style={{
+                      background: `
+                        radial-gradient(ellipse 30% 40% at 30% 35%, rgba(255,255,255,0.1) 0%, transparent 60%),
+                        radial-gradient(ellipse 25% 35% at 70% 65%, rgba(255,255,255,0.08) 0%, transparent 60%)
+                      `,
+                      filter: 'blur(0.8px)',
+                      opacity: '0.4',
+                    }}></div>
+                  </div>
+                  
+                  {/* 液态玻璃扭曲折射效果层 */}
+                  <div className="absolute inset-0 rounded-inherit pointer-events-none overflow-hidden">
+                    {/* 弧面反射高光 */}
+                    <div className="absolute top-0 left-0 right-0 h-1/2 rounded-t-inherit" style={{
+                      background: `
+                        radial-gradient(ellipse 70% 40% at 50% -5%, rgba(255,255,255,0.4) 0%, transparent 70%),
+                        linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 40%)
+                      `,
+                      transform: 'perspective(200px) rotateX(20deg) scaleY(0.5)',
+                      transformOrigin: 'center top',
+                    }}></div>
+                    
+                    {/* 折射扭曲线条 - 适配小尺寸 */}
+                    <div className="absolute inset-0 rounded-inherit" style={{
+                      background: `
+                        linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.12) 48%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.12) 52%, transparent 55%),
+                        linear-gradient(-45deg, transparent 65%, rgba(255,255,255,0.08) 68%, rgba(255,255,255,0.15) 70%, rgba(255,255,255,0.08) 72%, transparent 75%)
+                      `,
+                      filter: 'blur(0.2px)',
+                      opacity: '0.7',
+                    }}></div>
+                    
+                    {/* 液态散射效果 - 简化版 */}
+                    <div className="absolute inset-0 rounded-inherit" style={{
+                      background: `
+                        radial-gradient(ellipse 30% 40% at 30% 35%, rgba(255,255,255,0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse 25% 35% at 70% 65%, rgba(255,255,255,0.1) 0%, transparent 60%)
+                      `,
+                      filter: 'blur(0.8px)',
+                      opacity: '0.5',
+                    }}></div>
+                  </div>
+                  <div className="relative z-10">
+                    {item.icon}
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                <span className="text-sm font-medium text-white/90 group-hover:text-white drop-shadow">
                   {item.title}
                 </span>
               </Link>
@@ -77,15 +142,73 @@ const Hero = () => {
               <Link
                 key={index}
                 href={item.href}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all cursor-pointer group"
+                className="relative backdrop-blur-lg backdrop-saturate-[180%] rounded-xl p-6 shadow-2xl hover:shadow-2xl transition-all cursor-pointer group border border-white/20 overflow-hidden"
+                style={{
+                  backdropFilter: 'blur(8px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(8px) saturate(180%)',
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 100%)',
+                  boxShadow: `
+                    0 8px 32px rgba(0,0,0,0.12),
+                    0 0 0 1px rgba(255,255,255,0.05) inset,
+                    0 1px 0 rgba(255,255,255,0.2) inset
+                  `
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 100%)'
+                  e.currentTarget.style.backdropFilter = 'blur(6px) saturate(180%)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.02) 100%)'
+                  e.currentTarget.style.backdropFilter = 'blur(8px) saturate(180%)'
+                }}
               >
-                <div className={`w-12 h-12 ${item.bgColor} rounded-md flex items-center justify-center mx-auto mb-4 ${item.iconColor} group-hover:scale-110 transition-transform`}>
-                  {item.icon}
+                {/* 内部光晕效果 */}
+                <div className="absolute inset-0 rounded-inherit bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none"></div>
+                
+                {/* 简化的玻璃效果层 */}
+                <div className="absolute inset-0 rounded-inherit pointer-events-none overflow-hidden">
+                  {/* 顶部高光 */}
+                  <div className="absolute top-0 left-0 right-0 h-1/3 rounded-t-inherit" style={{
+                    background: `linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%)`,
+                  }}></div>
+                  
+                  {/* 散射效果 */}
+                  <div className="absolute inset-0 rounded-inherit" style={{
+                    background: `
+                      radial-gradient(ellipse 40% 60% at 25% 30%, rgba(255,255,255,0.08) 0%, transparent 65%),
+                      radial-gradient(ellipse 35% 55% at 75% 70%, rgba(255,255,255,0.06) 0%, transparent 65%)
+                    `,
+                    filter: 'blur(1px)',
+                    opacity: '0.3',
+                  }}></div>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600">{item.description}</p>
+                
+                {/* 悬停光晕效果 */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out pointer-events-none"></div>
+                
+                <div className="relative z-10">
+                  <div className={`relative w-12 h-12 backdrop-blur-lg backdrop-saturate-[180%] rounded-md flex items-center justify-center mx-auto mb-4 text-white group-hover:scale-110 transition-transform border border-white/10 overflow-hidden`}
+                  style={{
+                    backdropFilter: 'blur(8px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(8px) saturate(180%)',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 100%)',
+                    boxShadow: `
+                      0 4px 16px rgba(0,0,0,0.1),
+                      0 0 0 1px rgba(255,255,255,0.1) inset,
+                      0 1px 0 rgba(255,255,255,0.3) inset
+                    `
+                  }}>
+                    {/* 图标内部光晕 */}
+                    <div className="absolute inset-0 rounded-inherit bg-gradient-to-br from-white/15 via-transparent to-transparent pointer-events-none"></div>
+                    <div className="relative z-10">
+                      {item.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-white/90 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/80">{item.description}</p>
+                </div>
               </Link>
             ))}
           </div>

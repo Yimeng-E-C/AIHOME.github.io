@@ -58,14 +58,42 @@ export default function LinksPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">快捷入口</h1>
-          <p className="text-lg text-gray-600">
-            精选的AI工具、平台和资源链接，快速访问您需要的AI服务
-          </p>
+    <div className="min-h-screen">
+      {/* 动态渐变背景 - 只覆盖导航栏及以上部分 */}
+      <div className="fixed top-0 left-0 right-0 h-64 overflow-hidden z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-600 opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-tr from-purple-400 via-pink-300 to-blue-400 opacity-80 animate-pulse"></div>
+        <div className="absolute -top-20 -right-20 w-60 h-60 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-65 animate-blob"></div>
+        <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-65 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-20 left-20 w-60 h-60 bg-indigo-400 rounded-full mix-blend-multiply filter blur-xl opacity-65 animate-blob animation-delay-4000"></div>
+      </div>
+      
+      {/* 柔和过渡层 - 覆盖在渐变背景上面，相同尺寸 */}
+      <div className="fixed top-0 left-0 right-0 h-64 z-5">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20"></div>
+        <div className="absolute bottom-0 left-0 right-0">
+          <div className="h-20 bg-gradient-to-b from-transparent via-white/10 to-white/25"></div>
+          <div className="h-16 bg-gradient-to-b from-white/25 via-white/45 to-white/65"></div>
+          <div className="h-12 bg-gradient-to-b from-white/65 via-white/80 to-white/95"></div>
+          <div className="h-8 bg-gradient-to-b from-white/95 to-white"></div>
         </div>
+      </div>
+      
+      {/* 内容区域 */}
+      <div className="relative z-10 py-8 pt-28">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">快捷入口</h1>
+            <p className="text-lg text-gray-700">
+              精选的AI工具、平台和资源链接，快速访问您需要的AI服务
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      {/* 主内容区域 */}
+      <div className="relative z-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 pb-8">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {linkCategories.map((category, index) => (
@@ -119,6 +147,7 @@ export default function LinksPage() {
               </ul>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

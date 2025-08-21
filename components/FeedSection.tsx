@@ -27,7 +27,7 @@ const FeedSection = () => {
   ]
 
   return (
-    <section className="py-16 bg-white">
+    <section className="pt-8 pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           最新AI动态
