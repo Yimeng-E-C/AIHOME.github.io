@@ -34,7 +34,7 @@ export default function AcademicPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">学术前沿</h1>
           <p className="text-lg text-gray-600">
@@ -47,7 +47,7 @@ export default function AcademicPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">热门论文</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {papers.map((paper, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{paper.title}</h3>
                 <p className="text-sm text-gray-600 mb-2">作者: {paper.authors}</p>
                 <p className="text-sm text-gray-600 mb-2">期刊: {paper.journal}</p>
@@ -55,7 +55,7 @@ export default function AcademicPage() {
                 <p className="text-gray-700 mb-4 text-sm">{paper.summary}</p>
                 <a 
                   href={paper.link}
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors"
                 >
                   查看论文 →
                 </a>
@@ -67,7 +67,7 @@ export default function AcademicPage() {
         {/* 学术会议 */}
         <section>
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">重要会议</h2>
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="bg-white rounded-xl shadow-md overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -99,7 +99,7 @@ export default function AcademicPage() {
                         {conf.location}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        <span className={`px-2 py-1 rounded-pill text-xs font-medium ${
                           conf.status === '即将召开' ? 'bg-yellow-100 text-yellow-800' :
                           conf.status === '已结束' ? 'bg-gray-100 text-gray-800' :
                           'bg-green-100 text-green-800'

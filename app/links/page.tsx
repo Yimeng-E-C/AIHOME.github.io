@@ -59,7 +59,7 @@ export default function LinksPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">快捷入口</h1>
           <p className="text-lg text-gray-600">
@@ -69,19 +69,19 @@ export default function LinksPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {linkCategories.map((category, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md p-6">
+            <div key={index} className="bg-white rounded-xl shadow-md p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                <span className="w-2 h-2 bg-blue-500 rounded-circle mr-3"></span>
                 {category.title}
               </h2>
               <div className="space-y-3">
                 {category.links.map((link, linkIndex) => (
-                  <div key={linkIndex} className="border-l-4 border-blue-100 pl-4 hover:border-blue-300 transition-colors">
+                  <div key={linkIndex} className="border-l-4 border-blue-100 pl-4 hover:border-blue-300 transition-colors rounded-r-base">
                     <a
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block group"
+                      className="block group p-2 -m-2 rounded-base hover:bg-gray-50 transition-colors"
                     >
                       <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
                         {link.name}
@@ -99,7 +99,7 @@ export default function LinksPage() {
         </div>
 
         {/* 使用提示 */}
-        <div className="mt-12 bg-blue-50 rounded-lg p-6">
+        <div className="mt-12 bg-blue-50 rounded-xl p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">💡 使用提示</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
             <div>

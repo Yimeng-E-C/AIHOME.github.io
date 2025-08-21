@@ -16,10 +16,10 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md flex items-center justify-center">
               <span className="text-white font-bold text-sm">AI</span>
             </div>
             <span className="text-xl font-bold gradient-text">AIHOME</span>
@@ -33,7 +33,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors"
+                  className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition-colors px-3 py-2 rounded-pill hover:bg-gray-50"
                 >
                   <Icon size={18} />
                   <span>{item.name}</span>
@@ -44,7 +44,7 @@ const Navbar = () => {
 
           {/* 移动端菜单按钮 */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-circle hover:bg-gray-50 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center space-x-3 py-3 text-gray-700 hover:text-blue-600 transition-colors"
+                  className="flex items-center space-x-3 py-3 px-4 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-base transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   <Icon size={18} />

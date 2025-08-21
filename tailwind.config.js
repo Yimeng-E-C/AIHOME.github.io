@@ -36,6 +36,18 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
+      borderRadius: {
+        'xs': '4px',      // 小元素
+        'sm': '8px',      // 小按钮
+        'base': '12px',   // 标准按钮
+        'md': '16px',     // 中等卡片
+        'lg': '20px',     // 大卡片
+        'xl': '24px',     // 超大卡片
+        '2xl': '28px',    // 巨大卡片
+        '3xl': '32px',    // 特大卡片
+        'pill': '9999px', // 胶囊按钮
+        'circle': '50%',  // 圆形
+      },
     },
   },
   plugins: [],

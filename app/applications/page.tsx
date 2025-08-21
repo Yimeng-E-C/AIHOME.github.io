@@ -66,7 +66,7 @@ export default function ApplicationsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">商业应用</h1>
           <p className="text-lg text-gray-600">
@@ -79,7 +79,7 @@ export default function ApplicationsPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">主要AI公司</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {companies.map((company, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow">
                 <div className="flex items-center mb-4">
                   <span className="text-3xl mr-3">{company.logo}</span>
                   <h3 className="text-xl font-semibold text-gray-900">{company.name}</h3>
@@ -89,7 +89,7 @@ export default function ApplicationsPage() {
                   <h4 className="text-sm font-medium text-gray-900 mb-2">主要产品:</h4>
                   <div className="flex flex-wrap gap-2">
                     {company.products.map((product, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">
+                      <span key={idx} className="px-2 py-1 bg-blue-100 text-blue-800 rounded-pill text-sm">
                         {product}
                       </span>
                     ))}
@@ -99,7 +99,7 @@ export default function ApplicationsPage() {
                   href={company.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors"
                 >
                   访问官网 →
                 </a>
@@ -113,7 +113,7 @@ export default function ApplicationsPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">应用场景</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {useCases.map((useCase, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-md">
                 <div className="text-center mb-4">
                   <span className="text-4xl">{useCase.icon}</span>
                   <h3 className="text-lg font-semibold text-gray-900 mt-2">{useCase.category}</h3>
@@ -121,7 +121,7 @@ export default function ApplicationsPage() {
                 <ul className="space-y-2">
                   {useCase.examples.map((example, idx) => (
                     <li key={idx} className="text-sm text-gray-600 flex items-center">
-                      <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+                      <span className="w-2 h-2 bg-blue-400 rounded-circle mr-2"></span>
                       {example}
                     </li>
                   ))}
@@ -136,13 +136,13 @@ export default function ApplicationsPage() {
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">行业动态</h2>
           <div className="space-y-4">
             {news.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-md">
+              <div key={index} className="bg-white rounded-xl p-6 shadow-md">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
                   <span className="text-sm text-gray-500">{item.date}</span>
                 </div>
                 <p className="text-gray-700">{item.summary}</p>
-                <button className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium">
+                <button className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors">
                   阅读全文 →
                 </button>
               </div>
