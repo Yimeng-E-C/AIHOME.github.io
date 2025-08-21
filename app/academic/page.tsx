@@ -4,27 +4,27 @@ export default function AcademicPage() {
   const papers = [
     {
       title: "Attention Is All You Need",
-      authors: "Vaswani et al.",
-      journal: "NIPS 2017",
+      authors: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \nLukasz Kaiser, Illia Polosukhin",
+      journal: "NeurIPS 2017",
       citations: "50000+",
-      summary: "提出了Transformer架构，彻底改变了NLP领域",
-      link: "#"
+      summary: "首次提出 Transformer 架构，使用自注意力（self-attention）替代循环/卷积结构，显著提高并行效率并成为后续大规模语言模型与视觉 Transformer 的基础。",
+      link: "https://arxiv.org/abs/1706.03762"
     },
     {
-      title: "Language Models are Few-Shot Learners",
-      authors: "Brown et al.",
-      journal: "NIPS 2020", 
-      citations: "30000+",
-      summary: "GPT-3论文，展示了大规模语言模型的惊人能力",
-      link: "#"
+      title: "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      authors: "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova",
+      journal: "NAACL 2019 / arXiv",
+      citations: "70000+",
+      summary: "提出双向 Transformer 预训练方法（BERT），通过大规模无监督语料预训练后在多项下游任务上少量微调即可达成或超过当时最佳性能，推动了 NLP 预训练范式。",
+      link: "https://arxiv.org/abs/1810.04805"
     },
     {
-      title: "Retrieval-Augmented Generation",
-      authors: "Lewis et al.",
-      journal: "NIPS 2020",
-      citations: "15000+",
-      summary: "结合检索和生成的新方法，提高了知识密集型任务的性能",
-      link: "#"
+      title: "Language Models are Few-Shot Learners (GPT-3)",
+      authors: "Tom B. Brown, Benjamin Mann, Nick Ryder, et al.",
+      journal: "NeurIPS 2020 / arXiv",
+      citations: "40000+",
+      summary: "介绍 GPT-3，展示了超大规模自回归语言模型在无需或少量微调的 few-shot、one-shot 场景下的强大泛化能力，带来了通用语言模型的广泛应用与讨论。",
+      link: "https://arxiv.org/abs/2005.14165"
     }
   ]
 
