@@ -10,6 +10,25 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
 
+  // 兼容 production 时配置了 basePath（/AIHOME.github.io）导致 pathname 包含前缀的问题。
+  // 规范化 pathname：移除 basePath（若存在）并去除末尾斜杠，确保 '/' 能正确匹配。
+  const normalizePath = (p?: string) => {
+    if (!p) return '/' 
+    let s = p
+    const base = '/AIHOME.github.io'
+    if (s.startsWith(base)) {
+      s = s.slice(base.length) || '/'
+    }
+    if (s.endsWith('/') && s !== '/') s = s.slice(0, -1)
+    return s
+  }
+
+  const isActiveFor = (href: string) => {
+    const p = normalizePath(pathname)
+    const hrefNorm = href === '/' ? '/' : href.replace(/\/$/, '')
+    return p === hrefNorm || (hrefNorm !== '/' && p.startsWith(hrefNorm + '/'))
+  }
+
   // 性能优化相关的 refs 和状态
   const navRef = useRef<HTMLDivElement>(null)
   const animationFrameRef = useRef<number | null>(null)
@@ -278,7 +297,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((item) => {
               const Icon = item.icon
-              const isActive = pathname === item.href
+              const isActive = isActiveFor(item.href)
               return (
                 <Link
                   key={item.name}
@@ -406,7 +425,7 @@ const Navbar = () => {
             <div className="space-y-1">
               {navLinks.map((item) => {
                 const Icon = item.icon
-                const isActive = pathname === item.href
+                  const isActive = isActiveFor(item.href)
                 return (
                   <Link
                     key={item.name}
