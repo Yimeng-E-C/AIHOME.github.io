@@ -85,10 +85,10 @@ export default function ApplicationsPage() {
       {/* 内容区域 */}
       <div className="relative z-10 py-8 pt-28">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">商业应用</h1>
+            <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">工业发展</h1>
             <p className="text-lg text-gray-700">
-              探索AI在各行各业的商业应用，了解最新的产品动态和解决方案
+              工业界 AI 应用新闻速报，打破认知信息差
             </p>
           </div>
         </div>
@@ -98,6 +98,51 @@ export default function ApplicationsPage() {
       <div className="relative z-10">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 pb-8">
 
+        {/* 行业动态 (网格布局，和下方宽度对齐) */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">行业动态</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {news.map((item, index) => (
+              <div key={index} className="w-full bg-white rounded-xl p-6 shadow-md flex flex-col">
+                <div className="mb-2">
+                  <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+                </div>
+                <div className="flex-grow">
+                  <p className="text-gray-700">{item.summary}</p>
+                </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <span className="text-sm text-gray-500">{item.date}</span>
+                  <button className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors">
+                    阅读全文 →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 应用场景 */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold text-gray-900 mb-6">应用场景</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {useCases.map((useCase, index) => (
+              <div key={index} className="bg-white rounded-xl p-6 shadow-md">
+                <div className="text-center mb-4">
+                  <span className="text-4xl">{useCase.icon}</span>
+                  <h3 className="text-lg font-semibold text-gray-900 mt-2">{useCase.category}</h3>
+                </div>
+                <ul className="space-y-2">
+                  {useCase.examples.map((example, idx) => (
+                    <li key={idx} className="text-sm text-gray-600 flex items-center">
+                      <span className="w-2 h-2 bg-blue-400 rounded-circle mr-2"></span>
+                      {example}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
         {/* 主要公司 */}
         <section className="mb-12">
           <h2 className="text-2xl font-semibold text-gray-900 mb-6">主要AI公司</h2>
@@ -127,48 +172,6 @@ export default function ApplicationsPage() {
                 >
                   访问官网 →
                 </a>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 应用场景 */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">应用场景</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {useCases.map((useCase, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-md">
-                <div className="text-center mb-4">
-                  <span className="text-4xl">{useCase.icon}</span>
-                  <h3 className="text-lg font-semibold text-gray-900 mt-2">{useCase.category}</h3>
-                </div>
-                <ul className="space-y-2">
-                  {useCase.examples.map((example, idx) => (
-                    <li key={idx} className="text-sm text-gray-600 flex items-center">
-                      <span className="w-2 h-2 bg-blue-400 rounded-circle mr-2"></span>
-                      {example}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 行业动态 */}
-        <section>
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6">行业动态</h2>
-          <div className="space-y-4">
-            {news.map((item, index) => (
-              <div key={index} className="bg-white rounded-xl p-6 shadow-md">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
-                  <span className="text-sm text-gray-500">{item.date}</span>
-                </div>
-                <p className="text-gray-700">{item.summary}</p>
-                <button className="mt-3 text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors">
-                  阅读全文 →
-                </button>
               </div>
             ))}
           </div>

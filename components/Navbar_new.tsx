@@ -112,9 +112,9 @@ const Navbar = () => {
   }, [])
 
   const navLinks = [
-    { name: '学术前沿', href: '/academic', icon: GraduationCap },
-    { name: '商业应用', href: '/applications', icon: Briefcase },
-    { name: '快捷工具', href: '/links', icon: ExternalLink },
+  { name: '学术前沿', href: '/academic', icon: GraduationCap },
+  { name: '工业发展', href: '/applications', icon: Briefcase },
+    { name: 'AI PK', href: '/links', icon: ExternalLink },
   ]
 
   return (

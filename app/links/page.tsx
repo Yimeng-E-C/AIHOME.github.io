@@ -79,9 +79,9 @@ export default function LinksPage() {
       <div className="relative z-10 py-8 pt-28">
         <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">快捷入口</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">AI PK</h1>
             <p className="text-lg text-gray-700">
-              精选的AI工具、平台和资源链接，快速访问您需要的AI服务
+              精选 AI 工具与平台，快速比较与直达入口
             </p>
           </div>
         </div>

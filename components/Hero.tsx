@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 const Hero = () => {
   const navigationItems = [
-    {
-      title: "学术前沿",
-      description: "追踪最新AI研究动态",
+  {
+  title: "学术前沿",
+  description: "学术界 AI 科研事记",
       href: "/academic",
       bgColor: "bg-blue-100",
       iconColor: "text-blue-600",
@@ -17,9 +17,9 @@ const Hero = () => {
       )
     },
     {
-      title: "商业应用",
-      description: "发现AI的商业价值",
-      href: "/applications",
+    title: "工业发展",
+    description: "工业界 AI 应用新闻",
+        href: "/applications",
       bgColor: "bg-green-100",
       iconColor: "text-green-600",
       icon: (
@@ -29,9 +29,9 @@ const Hero = () => {
       )
     },
     {
-      title: "快捷工具",
-      description: "直达各大AI平台",
-      href: "/links",
+    title: "AI PK",
+    description: "AI 工具 PK 直达",
+        href: "/links",
       bgColor: "bg-purple-100",
       iconColor: "text-purple-600",
       icon: (
@@ -151,7 +151,7 @@ const Hero = () => {
           </h1>
           
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto relative flex justify-center whitespace-nowrap opacity-75">
-            {'您的AI信息聚合平台，追踪前沿学术研究，发现商业应用，探索AI世界'.split('').map((char, index) => (
+            {'AI 之家，追踪前沿学术研究，发现创新工业应用，打破 AI 信息差'.split('').map((char, index) => (
               <span
                 key={index}
                 className="relative transition-all duration-300 ease-out text-white"

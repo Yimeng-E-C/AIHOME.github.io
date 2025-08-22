@@ -39,7 +39,7 @@ const Navbar = () => {
     { name: '主页', href: '/', icon: Home },
     { name: '学术', href: '/academic', icon: GraduationCap },
     { name: '应用', href: '/applications', icon: Briefcase },
-    { name: '快捷入口', href: '/links', icon: ExternalLink },
+    { name: 'AI PK', href: '/links', icon: ExternalLink },
   ]
 
   return (
