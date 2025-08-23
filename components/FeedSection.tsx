@@ -141,7 +141,11 @@ const FeedSection = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           最新AI动态
         </h2>
-        <div className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}>
+        <motion.div
+          layout
+          className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+        >
           {/* 第一排始终显示，无动画 */}
           {initialNewsItems.map((item) => (
             <article
@@ -300,7 +304,7 @@ const FeedSection = () => {
               </motion.article>
             ))}
           </AnimatePresence>
-        </div>
+        </motion.div>
         
         {/* 分页器 - 只在展开状态显示 */}
         {isExpanded && (
