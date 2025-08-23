@@ -1,12 +1,10 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const FeedSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [slideDown, setSlideDown] = useState(false)
-  const listRef = useRef<HTMLDivElement>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 15
   
@@ -138,112 +136,24 @@ const FeedSection = () => {
   const newsItems = isExpanded ? allNewsItems : initialNewsItems
 
   return (
-    <motion.section
-      animate={slideDown ? { y: 200 } : { y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
-      onAnimationComplete={() => {
-        if (slideDown) {
-          setIsExpanded(false)
-          setSlideDown(false)
-        }
-      }}
-      className="pt-8 pb-16 bg-white"
-    >
+    <section className="pt-8 pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           最新AI动态
         </h2>
-        <motion.div
-          ref={listRef}
-          layout
-          className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
-        >
-          {/* 第一排始终显示，无动画 */}
-          {initialNewsItems.map((item) => (
-            <article
-              key={item.id}
-              className="relative rounded-xl p-6 cursor-pointer border border-white/20 overflow-hidden transition-all duration-300"
-              style={{
-                backdropFilter: 'blur(8px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(8px) saturate(180%)',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)',
-                boxShadow: `
-                  0 8px 32px rgba(0,0,0,0.1),
-                  0 0 0 1px rgba(255,255,255,0.2) inset,
-                  0 1px 0 rgba(255,255,255,0.4) inset
-                `
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.5) 100%)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = `
-                  0 12px 40px rgba(0,0,0,0.15),
-                  0 0 0 1px rgba(255,255,255,0.3) inset,
-                  0 1px 0 rgba(255,255,255,0.5) inset
-                `;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)';
-                e.currentTarget.style.transform = 'translateY(0px)';
-                e.currentTarget.style.boxShadow = `
-                  0 8px 32px rgba(0,0,0,0.1),
-                  0 0 0 1px rgba(255,255,255,0.2) inset,
-                  0 1px 0 rgba(255,255,255,0.4) inset
-                `;
-              }}
-            >
-              {/* ...卡片内容同原来... */}
-              <div className="absolute inset-0 rounded-xl pointer-events-none overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1/3 rounded-t-xl" style={{
-                  background: `linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 60%)`,
-                }}></div>
-                <div className="absolute inset-0 rounded-xl" style={{
-                  background: `
-                    radial-gradient(ellipse 40% 60% at 25% 30%, rgba(255,255,255,0.2) 0%, transparent 70%),
-                    radial-gradient(ellipse 35% 55% at 75% 70%, rgba(255,255,255,0.15) 0%, transparent 70%)
-                  `,
-                  filter: 'blur(1px)',
-                  opacity: '0.6',
-                }}></div>
-              </div>
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`px-3 py-1 rounded-pill text-sm font-medium ${
-                    item.category === '学术' 
-                      ? 'bg-blue-100 text-blue-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
-                    {item.category}
-                  </span>
-                  <span className="text-sm text-gray-500">{item.date}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 mb-3 line-clamp-3">
-                  {item.summary}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">
-                    来源: {item.source}
-                  </span>
-                  <button className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors">
-                    阅读更多 →
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
-          {/* 展开时新增卡片做动画 */}
-          <AnimatePresence>
-            {isExpanded && allNewsItems.slice(3).map((item) => (
-              <motion.article
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={isExpanded ? 'expanded' : 'collapsed'}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className={`grid gap-6 max-w-7xl mx-auto ${isExpanded ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}
+            style={{ overflow: 'hidden' }}
+          >
+            {newsItems.map((item) => (
+              <article
                 key={item.id}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: 'easeInOut' }}
                 className="relative rounded-xl p-6 cursor-pointer border border-white/20 overflow-hidden transition-all duration-300"
                 style={{
                   backdropFilter: 'blur(8px) saturate(180%)',
@@ -274,11 +184,13 @@ const FeedSection = () => {
                   `;
                 }}
               >
-                {/* ...卡片内容同原来... */}
+                {/* 液态玻璃内部效果 */}
                 <div className="absolute inset-0 rounded-xl pointer-events-none overflow-hidden">
+                  {/* 顶部高光 */}
                   <div className="absolute top-0 left-0 right-0 h-1/3 rounded-t-xl" style={{
                     background: `linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 60%)`,
                   }}></div>
+                  {/* 散射效果 */}
                   <div className="absolute inset-0 rounded-xl" style={{
                     background: `
                       radial-gradient(ellipse 40% 60% at 25% 30%, rgba(255,255,255,0.2) 0%, transparent 70%),
@@ -314,10 +226,10 @@ const FeedSection = () => {
                     </button>
                   </div>
                 </div>
-              </motion.article>
+              </article>
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
         
         {/* 分页器 - 只在展开状态显示 */}
         {isExpanded && (
@@ -471,13 +383,7 @@ const FeedSection = () => {
                 0 1px 0 rgba(255,255,255,0.3) inset
               `
             }}
-            onClick={() => {
-              if (isExpanded) {
-                setSlideDown(true)
-              } else {
-                setIsExpanded(true)
-              }
-            }}
+            onClick={() => setIsExpanded(!isExpanded)}
             onMouseMove={(e) => {
               // 简化为只保持基本的阴影效果
               e.currentTarget.style.transition = 'box-shadow 0.15s ease-out';
@@ -565,7 +471,7 @@ const FeedSection = () => {
           </button>
         </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 
