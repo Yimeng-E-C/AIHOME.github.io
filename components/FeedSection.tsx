@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const FeedSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const listRef = useRef<HTMLDivElement>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 15
   
@@ -142,6 +143,7 @@ const FeedSection = () => {
           最新AI动态
         </h2>
         <motion.div
+          ref={listRef}
           layout
           className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
@@ -458,7 +460,22 @@ const FeedSection = () => {
                 0 1px 0 rgba(255,255,255,0.3) inset
               `
             }}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => {
+              if (isExpanded) {
+                // 收起时，先滚动到列表顶部
+                if (listRef.current) {
+                  const top = listRef.current.getBoundingClientRect().top + window.scrollY - 32 // 适当留白
+                  window.scrollTo({ top, behavior: 'smooth' })
+                  setTimeout(() => {
+                    setIsExpanded(false)
+                  }, 400) // 400ms 与 scroll 动画同步
+                } else {
+                  setIsExpanded(false)
+                }
+              } else {
+                setIsExpanded(true)
+              }
+            }}
             onMouseMove={(e) => {
               // 简化为只保持基本的阴影效果
               e.currentTarget.style.transition = 'box-shadow 0.15s ease-out';
