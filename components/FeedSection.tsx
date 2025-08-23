@@ -462,16 +462,8 @@ const FeedSection = () => {
             }}
             onClick={() => {
               if (isExpanded) {
-                // 收起时，先滚动到列表顶部
-                if (listRef.current) {
-                  const top = listRef.current.getBoundingClientRect().top + window.scrollY - 32 // 适当留白
-                  window.scrollTo({ top, behavior: 'smooth' })
-                  setTimeout(() => {
-                    setIsExpanded(false)
-                  }, 400) // 400ms 与 scroll 动画同步
-                } else {
-                  setIsExpanded(false)
-                }
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                setIsExpanded(false)
               } else {
                 setIsExpanded(true)
               }
