@@ -16,19 +16,22 @@ const FeedSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [allNewsItems, setAllNewsItems] = useState<NewsItem[]>([])
+  const [loadError, setLoadError] = useState<string | null>(null)
   const pageSize = 15
 
   useEffect(() => {
     let mounted = true
 
-    const tryFetch = async () => {
+  const tryFetch = async () => {
       // Try multiple candidate locations so the feed works on project pages and root domains.
       const repoSegment = (window.location.pathname.split('/')[1] || '').trim()
       const candidates = [
         new URL('vb_news.json', window.location.href).href, // relative to current page
         new URL('/vb_news.json', window.location.origin).href, // site root
-        // if served under a repo subpath like /owner/repo/, try that first segment
-        repoSegment ? new URL(`/${repoSegment}/vb_news.json`, window.location.origin).href : null
+    // if served under a repo subpath like /owner/repo/, try that first segment
+    repoSegment ? new URL(`/${repoSegment}/vb_news.json`, window.location.origin).href : null,
+    // explicit fallback for this repository when Pages serves project at /AIHOME.github.io/
+    new URL('/AIHOME.github.io/vb_news.json', window.location.origin).href
       ].filter(Boolean) as string[]
 
       let lastError: any = null
@@ -38,6 +41,12 @@ const FeedSection = () => {
           if (!res.ok) {
             lastError = `HTTP ${res.status} for ${url}`
             console.warn('[FeedSection] fetch failed:', lastError)
+            continue
+          }
+          const ct = res.headers.get('content-type') || ''
+          if (!ct.includes('application/json')) {
+            lastError = `Not JSON (content-type: ${ct}) at ${url}`
+            console.warn('[FeedSection] fetch skipped non-JSON response:', lastError)
             continue
           }
           const data = await res.json()
@@ -59,8 +68,9 @@ const FeedSection = () => {
           console.warn('[FeedSection] fetch error for', url, err)
         }
       }
-      // if we reach here nothing worked — keep empty but log final error
-      console.error('[FeedSection] failed to load vb_news.json, last error:', lastError)
+  // if we reach here nothing worked — keep empty but log final error and show UI hint
+  console.error('[FeedSection] failed to load vb_news.json, last error:', lastError)
+  if (mounted) setLoadError(String(lastError || 'unknown'))
     }
 
     tryFetch()
