@@ -16,12 +16,16 @@ const FeedSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [allNewsItems, setAllNewsItems] = useState<NewsItem[]>([])
+  const [loadError, setLoadError] = useState<string | null>(null)
   const pageSize = 15
 
   useEffect(() => {
     let mounted = true
     fetch('/vb_news.json')
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) throw new Error('新闻数据加载失败')
+        return r.json()
+      })
       .then((data: any[]) => {
         if (!mounted) return
         // map to NewsItem shape
@@ -35,9 +39,10 @@ const FeedSection = () => {
           link: it.link ?? ''
         }))
         setAllNewsItems(mapped)
+        setLoadError(null)
       })
-      .catch(() => {
-        // keep empty on error
+      .catch((err) => {
+        setLoadError('最新动态加载失败，请稍后重试。')
       })
     return () => { mounted = false }
   }, [])
@@ -58,103 +63,111 @@ const FeedSection = () => {
         <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
           最新AI动态
         </h2>
-        <div className="text-center text-sm text-gray-500 mb-6">已加载 {allNewsItems.length} 条动态</div>
-        <div className={`grid gap-6 max-w-7xl mx-auto transition-all duration-500 ${
-          isExpanded 
-            ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-            : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-        }`}>
-          {newsItems.map((item) => (
-            <article
-              key={item.id}
-              className="relative rounded-xl p-6 cursor-pointer border border-white/20 overflow-hidden transition-all duration-300"
-              style={{
-                backdropFilter: 'blur(8px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(8px) saturate(180%)',
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)',
-                boxShadow: `
-                  0 8px 32px rgba(0,0,0,0.1),
-                  0 0 0 1px rgba(255,255,255,0.2) inset,
-                  0 1px 0 rgba(255,255,255,0.4) inset
-                `
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.5) 100%)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = `
-                  0 12px 40px rgba(0,0,0,0.15),
-                  0 0 0 1px rgba(255,255,255,0.3) inset,
-                  0 1px 0 rgba(255,255,255,0.5) inset
-                `;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)';
-                e.currentTarget.style.transform = 'translateY(0px)';
-                e.currentTarget.style.boxShadow = `
-                  0 8px 32px rgba(0,0,0,0.1),
-                  0 0 0 1px rgba(255,255,255,0.2) inset,
-                  0 1px 0 rgba(255,255,255,0.4) inset
-                `;
-              }}
-            >
-              {/* 液态玻璃内部效果 */}
-              <div className="absolute inset-0 rounded-xl pointer-events-none overflow-hidden">
-                {/* 顶部高光 */}
-                <div className="absolute top-0 left-0 right-0 h-1/3 rounded-t-xl" style={{
-                  background: `linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 60%)`,
-                }}></div>
-                
-                {/* 散射效果 */}
-                <div className="absolute inset-0 rounded-xl" style={{
-                  background: `
-                    radial-gradient(ellipse 40% 60% at 25% 30%, rgba(255,255,255,0.2) 0%, transparent 70%),
-                    radial-gradient(ellipse 35% 55% at 75% 70%, rgba(255,255,255,0.15) 0%, transparent 70%)
-                  `,
-                  filter: 'blur(1px)',
-                  opacity: '0.6',
-                }}></div>
-              </div>
-              
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-3">
-                  <span className={`px-3 py-1 rounded-pill text-sm font-medium ${
-                    item.category === '学术' 
-                      ? 'bg-blue-100 text-blue-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
-                    {item.category}
-                  </span>
-                  <span className="text-sm text-gray-500">{item.date}</span>
-                </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 mb-3 line-clamp-3">
-                  {item.summary}
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">
-                    来源: {item.source}
-                  </span>
-                  {item.link ? (
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors"
-                    >
-                      阅读更多 →
-                    </a>
-                  ) : (
-                    <button className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors">
-                      阅读更多 →
-                    </button>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+        {loadError ? (
+          <div className="text-center text-red-500 py-8 text-lg font-semibold">
+            {loadError}
+          </div>
+        ) : (
+          <>
+            <div className="text-center text-sm text-gray-500 mb-6">已加载 {allNewsItems.length} 条动态</div>
+            <div className={`grid gap-6 max-w-7xl mx-auto transition-all duration-500 ${
+              isExpanded 
+                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
+                : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+            }`}>
+              {newsItems.map((item) => (
+                <article
+                  key={item.id}
+                  className="relative rounded-xl p-6 cursor-pointer border border-white/20 overflow-hidden transition-all duration-300"
+                  style={{
+                    backdropFilter: 'blur(8px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(8px) saturate(180%)',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)',
+                    boxShadow: `
+                      0 8px 32px rgba(0,0,0,0.1),
+                      0 0 0 1px rgba(255,255,255,0.2) inset,
+                      0 1px 0 rgba(255,255,255,0.4) inset
+                    `
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.5) 100%)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = `
+                      0 12px 40px rgba(0,0,0,0.15),
+                      0 0 0 1px rgba(255,255,255,0.3) inset,
+                      0 1px 0 rgba(255,255,255,0.5) inset
+                    `;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 100%)';
+                    e.currentTarget.style.transform = 'translateY(0px)';
+                    e.currentTarget.style.boxShadow = `
+                      0 8px 32px rgba(0,0,0,0.1),
+                      0 0 0 1px rgba(255,255,255,0.2) inset,
+                      0 1px 0 rgba(255,255,255,0.4) inset
+                    `;
+                  }}
+                >
+                  {/* 液态玻璃内部效果 */}
+                  <div className="absolute inset-0 rounded-xl pointer-events-none overflow-hidden">
+                    {/* 顶部高光 */}
+                    <div className="absolute top-0 left-0 right-0 h-1/3 rounded-t-xl" style={{
+                      background: `linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 60%)`,
+                    }}></div>
+                    
+                    {/* 散射效果 */}
+                    <div className="absolute inset-0 rounded-xl" style={{
+                      background: `
+                        radial-gradient(ellipse 40% 60% at 25% 30%, rgba(255,255,255,0.2) 0%, transparent 70%),
+                        radial-gradient(ellipse 35% 55% at 75% 70%, rgba(255,255,255,0.15) 0%, transparent 70%)
+                      `,
+                      filter: 'blur(1px)',
+                      opacity: '0.6',
+                    }}></div>
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className={`px-3 py-1 rounded-pill text-sm font-medium ${
+                        item.category === '学术' 
+                          ? 'bg-blue-100 text-blue-800' 
+                          : 'bg-green-100 text-green-800'
+                      }`}>
+                        {item.category}
+                      </span>
+                      <span className="text-sm text-gray-500">{item.date}</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 mb-3 line-clamp-3">
+                      {item.summary}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-gray-500">
+                        来源: {item.source}
+                      </span>
+                      {item.link ? (
+                        <a
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors"
+                        >
+                          阅读更多 →
+                        </a>
+                      ) : (
+                        <button className="text-blue-600 hover:text-blue-800 text-sm font-medium px-3 py-1 rounded-pill hover:bg-blue-50 transition-colors">
+                          阅读更多 →
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </>
+        )}
         
         {/* 分页器 - 只在展开状态显示 */}
         {isExpanded && (
