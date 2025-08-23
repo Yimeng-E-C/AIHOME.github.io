@@ -17,6 +17,7 @@ const FeedSection = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [allNewsItems, setAllNewsItems] = useState<NewsItem[]>([])
   const [loadError, setLoadError] = useState<string | null>(null)
+  const [loadedFromUrl, setLoadedFromUrl] = useState<string | null>(null)
   const pageSize = 15
 
   useEffect(() => {
@@ -61,6 +62,7 @@ const FeedSection = () => {
             link: it.link ?? ''
           }))
           setAllNewsItems(mapped)
+          setLoadedFromUrl(url)
           console.info('[FeedSection] loaded vb_news.json from', url)
           return
         } catch (err) {
