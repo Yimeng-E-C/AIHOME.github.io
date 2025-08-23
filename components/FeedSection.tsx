@@ -1,13 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion'
 
 const FeedSection = () => {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 15
-  
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [animating, setAnimating] = useState(false);
+  const [contentHeight, setContentHeight] = useState<number | 'auto'>(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const contentRef = useRef<HTMLDivElement>(null);
+
   // 扩展的新闻数据（5*3=15项）
   const allNewsItems = [
     {
@@ -135,6 +137,26 @@ const FeedSection = () => {
   const initialNewsItems = allNewsItems.slice(0, 3)
   const newsItems = isExpanded ? allNewsItems : initialNewsItems
 
+  useLayoutEffect(() => {
+    if (isExpanded && contentRef.current) {
+      setContentHeight('auto');
+    }
+  }, [isExpanded]);
+
+  const handleCollapse = () => {
+    if (contentRef.current) {
+      setContentHeight(contentRef.current.offsetHeight);
+      setAnimating(true);
+      setTimeout(() => {
+        setContentHeight(0);
+        setIsExpanded(false);
+        setAnimating(false);
+      }, 10); // 触发动画
+    } else {
+      setIsExpanded(false);
+    }
+  }
+
   return (
     <section className="pt-8 pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
@@ -148,10 +170,10 @@ const FeedSection = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className={`grid gap-6 max-w-7xl mx-auto ${isExpanded ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}
-            style={{ overflow: 'hidden' }}
+            className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
+            style={{ overflow: 'visible' }}
           >
-            {newsItems.map((item) => (
+            {(isExpanded ? allNewsItems : initialNewsItems).map((item) => (
               <article
                 key={item.id}
                 className="relative rounded-xl p-6 cursor-pointer border border-white/20 overflow-hidden transition-all duration-300"
@@ -383,7 +405,13 @@ const FeedSection = () => {
                 0 1px 0 rgba(255,255,255,0.3) inset
               `
             }}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => {
+              if (isExpanded) {
+                handleCollapse();
+              } else {
+                setIsExpanded(true);
+              }
+            }}
             onMouseMove={(e) => {
               // 简化为只保持基本的阴影效果
               e.currentTarget.style.transition = 'box-shadow 0.15s ease-out';
