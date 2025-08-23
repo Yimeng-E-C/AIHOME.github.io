@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const FeedSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
-  const [slideUp, setSlideUp] = useState(false)
+  const [slideDown, setSlideDown] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 15
@@ -138,7 +138,17 @@ const FeedSection = () => {
   const newsItems = isExpanded ? allNewsItems : initialNewsItems
 
   return (
-    <section className="pt-8 pb-16 bg-white">
+    <motion.section
+      animate={slideDown ? { y: 200 } : { y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      onAnimationComplete={() => {
+        if (slideDown) {
+          setIsExpanded(false)
+          setSlideDown(false)
+        }
+      }}
+      className="pt-8 pb-16 bg-white"
+    >
       <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
           最新AI动态
@@ -146,15 +156,8 @@ const FeedSection = () => {
         <motion.div
           ref={listRef}
           layout
-          animate={slideUp ? { y: -window.scrollY } : { y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
-          onAnimationComplete={() => {
-            if (slideUp) {
-              setIsExpanded(false)
-              setSlideUp(false)
-            }
-          }}
           className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
           {/* 第一排始终显示，无动画 */}
           {initialNewsItems.map((item) => (
@@ -470,7 +473,7 @@ const FeedSection = () => {
             }}
             onClick={() => {
               if (isExpanded) {
-                setSlideUp(true)
+                setSlideDown(true)
               } else {
                 setIsExpanded(true)
               }
@@ -562,7 +565,7 @@ const FeedSection = () => {
           </button>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 
