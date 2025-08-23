@@ -149,7 +149,7 @@ const FeedSection = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
             className={`grid gap-6 max-w-7xl mx-auto ${isExpanded ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}
-            style={{ overflow: 'hidden' }}
+            style={{ overflow: 'visible' }}
           >
             {newsItems.map((item) => (
               <article
