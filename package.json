@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+  "dev": "next dev",
     "build": "next build",
     "start": "next start",
+  "update-news": "python3 scripts/update_news.py",
     "lint": "next lint"
   },
   "dependencies": {
