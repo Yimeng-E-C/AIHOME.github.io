@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const FeedSection = () => {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [slideUp, setSlideUp] = useState(false)
   const listRef = useRef<HTMLDivElement>(null)
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 15
@@ -145,8 +146,15 @@ const FeedSection = () => {
         <motion.div
           ref={listRef}
           layout
-          className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
+          animate={slideUp ? { y: -window.scrollY } : { y: 0 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
+          onAnimationComplete={() => {
+            if (slideUp) {
+              setIsExpanded(false)
+              setSlideUp(false)
+            }
+          }}
+          className={`grid gap-6 max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
         >
           {/* 第一排始终显示，无动画 */}
           {initialNewsItems.map((item) => (
@@ -462,15 +470,7 @@ const FeedSection = () => {
             }}
             onClick={() => {
               if (isExpanded) {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-                document.documentElement.scrollTop = 0
-                document.body.scrollTop = 0
-                setTimeout(() => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                  document.documentElement.scrollTop = 0
-                  document.body.scrollTop = 0
-                }, 100)
-                setIsExpanded(false)
+                setSlideUp(true)
               } else {
                 setIsExpanded(true)
               }
