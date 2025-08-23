@@ -55,6 +55,8 @@ jobs:
         run: |
           rm -rf docs || true
           cp -R out docs
+          # Disable Jekyll processing on GitHub Pages to avoid SCSS/Jekyll render errors
+          touch docs/.nojekyll
           git checkout --orphan gh-pages || true
           git --work-tree=docs add --all
           git --work-tree=docs commit -m "chore(deploy): update static site" || true
