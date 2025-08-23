@@ -463,6 +463,13 @@ const FeedSection = () => {
             onClick={() => {
               if (isExpanded) {
                 window.scrollTo({ top: 0, behavior: 'smooth' })
+                document.documentElement.scrollTop = 0
+                document.body.scrollTop = 0
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  document.documentElement.scrollTop = 0
+                  document.body.scrollTop = 0
+                }, 100)
                 setIsExpanded(false)
               } else {
                 setIsExpanded(true)
