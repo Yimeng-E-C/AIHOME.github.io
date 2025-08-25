@@ -24,6 +24,7 @@
     "typescript": "^5"
   },
   "devDependencies": {
+    "@types/react-transition-group": "^4.4.12",
     "eslint": "^8",
     "eslint-config-next": "14.0.4"
   }
