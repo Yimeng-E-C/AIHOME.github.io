@@ -1,0 +1,18 @@
+.expand-enter {
+  opacity: 0;
+  transform: scaleY(0.9);
+}
+.expand-enter-active {
+  opacity: 1;
+  transform: scaleY(1);
+  transition: opacity 300ms, transform 300ms;
+}
+.expand-exit {
+  opacity: 1;
+  transform: scaleY(1);
+}
+.expand-exit-active {
+  opacity: 0;
+  transform: scaleY(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "update-news": "python3 scripts/update_news.py",
     "lint": "next lint"
   },
   "dependencies": {
@@ -20,6 +19,7 @@
     "postcss": "^8.4.32",
     "react": "^18",
     "react-dom": "^18",
+    "react-transition-group": "^4.4.5",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },

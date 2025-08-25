@@ -1,8 +1,38 @@
 'use client'
 
 import Link from 'next/link'
+import React, { useState } from 'react';
 
 const Hero = () => {
+  const [showPapers, setShowPapers] = useState(false);
+
+  const papers = [
+    {
+      title: "Attention Is All You Need",
+      authors: "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, \nLukasz Kaiser, Illia Polosukhin",
+      journal: "NeurIPS 2017",
+      citations: "50000+",
+      summary: "首次提出 Transformer 架构，使用自注意力（self-attention）替代循环/卷积结构，显著提高并行效率并成为后续大规模语言模型与视觉 Transformer 的基础。",
+      link: "https://arxiv.org/abs/1706.03762"
+    },
+    {
+      title: "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+      authors: "Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova",
+      journal: "NAACL 2019 / arXiv",
+      citations: "70000+",
+      summary: "提出双向 Transformer 预训练方法（BERT），通过大规模无监督语料预训练后在多项下游任务上少量微调即可达成或超过当时最佳性能，推动了 NLP 预训练范式。",
+      link: "https://arxiv.org/abs/1810.04805"
+    },
+    {
+      title: "Language Models are Few-Shot Learners (GPT-3)",
+      authors: "Tom B. Brown, Benjamin Mann, Nick Ryder, et al.",
+      journal: "NeurIPS 2020 / arXiv",
+      citations: "40000+",
+      summary: "介绍 GPT-3，展示了超大规模自回归语言模型在无需或少量微调的 few-shot、one-shot 场景下的强大泛化能力，带来了通用语言模型的广泛应用与讨论。",
+      link: "https://arxiv.org/abs/2005.14165"
+    }
+  ];
+
   const navigationItems = [
   {
   title: "学术前沿",
