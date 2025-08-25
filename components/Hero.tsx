@@ -34,9 +34,9 @@ const Hero = () => {
   ];
 
   const navigationItems = [
-  {
-  title: "学术前沿",
-  description: "学术界 AI 科研事记",
+    {
+      title: "学术前沿",
+      description: "学术界 AI 科研事记",
       href: "/academic",
       bgColor: "bg-blue-100",
       iconColor: "text-blue-600",
@@ -47,9 +47,9 @@ const Hero = () => {
       )
     },
     {
-    title: "工业发展",
-    description: "工业界 AI 应用新闻",
-        href: "/applications",
+      title: "工业发展",
+      description: "工业界 AI 应用新闻",
+      href: "/applications",
       bgColor: "bg-green-100",
       iconColor: "text-green-600",
       icon: (
@@ -59,14 +59,26 @@ const Hero = () => {
       )
     },
     {
-    title: "AI PK",
-    description: "AI 工具 PK 直达",
-        href: "/links",
+      title: "AI PK",
+      description: "AI 工具 PK 直达",
+      href: "/links",
       bgColor: "bg-purple-100",
       iconColor: "text-purple-600",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+      )
+    },
+    {
+      title: "公众号专栏",
+      description: "最新 AI 相关文章",
+      href: "/publications",
+      bgColor: "bg-yellow-100",
+      iconColor: "text-yellow-600",
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zm0 0c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 0c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z" />
         </svg>
       )
     }
@@ -371,7 +383,7 @@ const Hero = () => {
           </div>
 
           {/* 桌面端：卡片布局 */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div className="hidden md:grid md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {navigationItems.map((item, index) => (
               <Link
                 key={index}

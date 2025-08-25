@@ -12,7 +12,7 @@ const Navbar = () => {
 
   // 兼容 production 时配置了 basePath（/AIHOME.github.io）导致 pathname 包含前缀的问题。
   // 规范化 pathname：移除 basePath（若存在）并去除末尾斜杠，确保 '/' 能正确匹配。
-  const normalizePath = (p?: string) => {
+  const normalizePath = (p?: string | null) => {
     if (!p) return '/' 
     let s = p
     const base = '/AIHOME.github.io'
@@ -112,9 +112,10 @@ const Navbar = () => {
   }, [])
 
   const navLinks = [
-  { name: '学术前沿', href: '/academic', icon: GraduationCap },
-  { name: '工业发展', href: '/applications', icon: Briefcase },
+    { name: '学术前沿', href: '/academic', icon: GraduationCap },
+    { name: '工业发展', href: '/applications', icon: Briefcase },
     { name: 'AI PK', href: '/links', icon: ExternalLink },
+    { name: '公众号专栏', href: '/publications', icon: ExternalLink }, // 添加 "公众号专栏"
   ]
 
   return (
